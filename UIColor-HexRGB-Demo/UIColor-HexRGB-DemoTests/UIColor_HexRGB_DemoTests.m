@@ -31,10 +31,18 @@
     UIColor *testColor = [UIColor colorWithDisplayP3Red:0 green:0 blue:0 alpha:1];
     
     XCTAssertEqualObjects(hexColor, testColor);
+    
+    UIColor *incorrectColor = [UIColor colorWithHex:@"00"];
+    UIColor *fallbackColor = [UIColor clearColor];
+    XCTAssertEqualObjects(incorrectColor, fallbackColor);
+    
+    UIColor *otherIncorrectColor = [UIColor colorWithHex:@"#0022334455"];
+    XCTAssertEqualObjects(otherIncorrectColor, fallbackColor);
 }
 
 
 - (void)testColorWithRGBA {
+    // Please note - for incorrectly defined colors extension will return clear (!) color
     UIColor *RGBColor = [UIColor colorWithRGBA:@"255.255.255.1"];
     UIColor *testColor = [UIColor clearColor];
     
